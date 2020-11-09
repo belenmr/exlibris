@@ -5,11 +5,11 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/purple_700"
+    android:background="@color/primaryColor"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:title="Mi Biblioteca"
-    app:titleTextColor="@color/black"
+    app:titleTextColor="@color/primaryTextColor"
     tools:visibility="visible">
 
 </androidx.appcompat.widget.Toolbar>
