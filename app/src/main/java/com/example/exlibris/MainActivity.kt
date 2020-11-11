@@ -6,15 +6,26 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var fabAddBook: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setupUI()
+
+    }
+
+    private fun setupUI() {
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        fabAddBook = findViewById(R.id.floatingActionButton)
+        fabAddBook.setOnClickListener{ launchAddBookActivity() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -40,4 +51,10 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, PreferenceActivity::class.java)
         )
     }*/
+
+    private fun launchAddBookActivity(){
+        startActivity(
+                Intent(this, AddBookActivity::class.java)
+        )
+    }
 }
