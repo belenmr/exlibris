@@ -3,7 +3,11 @@
     package="com.example.exlibris">
 
     <!-- Restringir visibilidad en Google Play solo a dispositivos con camara -->
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature android:name="android.hardware.camera2" android:required="true" />
+    <!-- Permisos para utilizacion camara -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"  />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,21 +17,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Exlibris">
         <activity android:name=".preferences.PreferenceActivity"></activity>
-        <activity android:name=".AddBookActivity" />
+        <activity android:name=".SplashScreenActivity" />
         <activity android:name=".BookActivity" />
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".AddBookActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.exlibris.fileprovider"
-            android:exported="false"
+            android:authorities="com.example.exlibris"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
