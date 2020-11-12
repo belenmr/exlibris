@@ -16,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Exlibris">
+        <activity android:name=".preferences.AboutMeActivity"></activity>
         <activity android:name=".preferences.PreferenceActivity"></activity>
         <activity android:name=".SplashScreenActivity" />
         <activity android:name=".BookActivity" />

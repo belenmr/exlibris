@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity() {
                     Intent(this, com.example.exlibris.preferences.PreferenceActivity::class.java)
             )
         }
+        if (item.itemId == R.id.itemAboutMe) {
+            startActivity(
+                    Intent(this, com.example.exlibris.preferences.AboutMeActivity::class.java)
+            )}
 
         return super.onOptionsItemSelected(item)
 

@@ -6,5 +6,8 @@
         android:title="Settings"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/itemAboutMe"
+        android:title="About Me" />
 
 </menu>

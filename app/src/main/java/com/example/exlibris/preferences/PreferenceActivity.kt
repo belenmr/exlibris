@@ -62,12 +62,13 @@ class PreferenceActivity : AppCompatActivity() {
         val nombre = eTnombreBiblioteca.text.toString()
 
         if (nombre.isNotEmpty()) {
-            actionBar?.title = "La Biblioteca De $nombre"
+            supportActionBar?.title  = "La Biblioteca De $nombre"
             }
 
         else {
             mensajeAdvertencia("Completar nombre")
         }
+
     }
 
     private fun mensajeAdvertencia(mensaje: String) {
