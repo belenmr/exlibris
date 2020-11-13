@@ -9,13 +9,20 @@ import androidx.preference.PreferenceManager
 import android.text.Editable
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.exlibris.adapter.BookAdapter
+import com.example.exlibris.data.Book
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 const val CAMBIAR_NOMBRE = "CambiarNombre"
 
 class MainActivity : AppCompatActivity() {
+
+    var books: List<Book> = listOf()
 
     private lateinit var fabAddBook: FloatingActionButton
 
@@ -29,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupUI()
-
+        initRecycler()
     }
 
     private fun setupUI() {
@@ -70,10 +77,15 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "La Biblioteca De $nombre"
     }
 
-    
+
     private fun launchAddBookActivity(){
         startActivity(
                 Intent(this, AddBookActivity::class.java)
         )
+    }
+
+    fun initRecycler(){
+        rvBooks.layoutManager = LinearLayoutManager(this)
+        val adapter = BookAdapter(books)
     }
 }

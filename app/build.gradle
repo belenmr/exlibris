@@ -44,9 +44,13 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
     //Preference
     implementation "androidx.preference:preference-ktx:$preference_version"
+
 
     //Database
     implementation 'com.j256.ormlite:ormlite-core:5.1'
