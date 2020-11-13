@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginTop="8dp">
 
     <ImageView
         android:id="@+id/ivBook"
@@ -18,13 +19,22 @@
             android:id="@+id/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text = "Los Juegos Del Hambre"/>
+            tools:text = "Los Juegos Del Hambre"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#101010"
+            />
 
         <TextView
             android:id="@+id/tvAutor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text = "Suzanne Collins"/>
+            tools:text = "Suzanne Collins"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"/>
 
     </LinearLayout>
 
