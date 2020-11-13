@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory android:title = "Personalizar Toolbar" >
+    <EditTextPreference
+        android:key = "CambiarNombre"
+        android:title = "Cambiar Nombre"
+        android:summary = "Puede cambiar el nombre del titulo"
+        android:inputType="text"
+        android:selectAllOnFocus = "true"
+        android:singleLine ="true"
+    />
+</PreferenceCategory>
+
+</PreferenceScreen>

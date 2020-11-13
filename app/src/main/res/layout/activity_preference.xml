@@ -2,92 +2,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cLcontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".preferences.PreferenceActivity">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
-    <TextView
-        android:id="@+id/tVpreference"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
-        android:text="Preferencias"
-        app:layout_constraintBottom_toBottomOf="parent"
+        layout="@layout/toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/contenedorAjustes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091" />
-
-    <Switch
-        android:id="@+id/sWcambiarNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="296dp"
-        android:layout_marginBottom="21dp"
-        android:text="Cambiar Nombre Toolbar"
-        app:layout_constraintBottom_toTopOf="@+id/tVnombre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0"
-        />
-
-    <Button
-        android:id="@+id/BtnCambiarNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="541dp"
-        android:text="Cambiar Nombre"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eTnombreBiblioteca"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/eTnombreBiblioteca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tVnombre"
-        app:layout_constraintTop_toBottomOf="@+id/tVpreference"
-        app:layout_constraintVertical_bias="0.008" />
-
-    <TextView
-        android:id="@+id/tVnombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="176dp"
-        android:layout_marginEnd="10dp"
-        android:text="Nombre Biblioteca"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/eTnombreBiblioteca"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/contenedorAjustes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
