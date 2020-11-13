@@ -13,9 +13,7 @@ class Book (
     @DatabaseField
     val name: String,
     @DatabaseField
-    val surnameAuthor: String,
-    @DatabaseField
-    val nameAuthor: String,
+    val author: String,
     @DatabaseField
     val publishingHouse: String,
     @DatabaseField
@@ -27,5 +25,5 @@ class Book (
     @DatabaseField(id = true)
     val id: Int? = null
 ) : Parcelable {
-    constructor() : this(0,"","","","","",false,null)
+    constructor() : this(0,"","","","",false,null)
 }
