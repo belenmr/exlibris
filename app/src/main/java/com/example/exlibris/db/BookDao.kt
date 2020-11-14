@@ -22,5 +22,5 @@ class BookDao(private val context: Context) {
 
     fun getBook() = dao.queryForAll()
 
-    fun getBooks(bookId: Int) = dao.queryForId(bookId)
+    fun getBook(bookId: Int) = dao.queryForId(bookId)
 }
