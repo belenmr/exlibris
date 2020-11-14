@@ -12,6 +12,7 @@ import com.example.exlibris.R
 import com.example.exlibris.data.Book
 import com.example.exlibris.preferences.PreferenceActivity
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.item_books.view.*
 
 class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookHolder>(){
@@ -23,6 +24,7 @@ class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookH
 
     override fun onBindViewHolder(holder: BookHolder, position: Int) {
         holder.render(books[position])
+
     }
 
     override fun getItemCount(): Int = books.size
@@ -32,7 +34,26 @@ class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookH
             view.tvTitulo.text = books.name
             view.tvAutor.text = books.author
             Picasso.get().load(books.resImage).into(view.ivBook)
+            view.setOnClickListener{
+                val intent = Intent(view.context,BookActivity::class.java)
+                intent.putExtra("titulo", view.tvTitulo.getText());
+                intent.putExtra("autor", view.tvAutor.getText());
+                // para las imágenes de esta forma:
+                intent.putExtra("imagen", books.resImage);
+                view.getContext().startActivity(intent)
+            }
+
+
+            /*view.setOnClickListener() {
+                val intent = new Intent(view.getContext(), BookActivity.class);
+                // envías los TextView de esta forma:
+                intent.putExtra("clave1", textViewNombre.getText());
+                // para las imágenes de esta forma:
+                intent.putExtra("clave2", shows.get(getAdapterPosition()).getImg_show());
+                view.getContext().startActivity(intent);
+            }*/
         }
+
 
     }
 
