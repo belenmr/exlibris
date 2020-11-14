@@ -20,7 +20,8 @@ class BookDao(private val context: Context) {
 
     fun updateBook(book: Book) = dao.update(book)
 
-    fun getBook() = dao.queryForAll()
+    fun getBooks() = dao.queryForAll()
 
     fun getBook(bookId: Int) = dao.queryForId(bookId)
+
 }

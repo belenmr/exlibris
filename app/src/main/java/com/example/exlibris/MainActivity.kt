@@ -9,7 +9,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exlibris.adapter.BookAdapter
-import com.example.exlibris.data.Book
 import com.example.exlibris.db.BookDao
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
@@ -81,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initRecycler(){
-        var books = BookDao(this).getBook()
+        var books = BookDao(this).getBooks()
         rvBooks.layoutManager = LinearLayoutManager(this)
         val adapter = BookAdapter(books)
         rvBooks.adapter = adapter
