@@ -25,7 +25,7 @@ class BookActivity : AppCompatActivity() {
         val bundle = intent.extras
         val titulo = bundle?.getString("titulo")
         val autor = bundle?.getString("autor")
-        val imagen = bundle?.getInt("imagen")
+        val imagen = bundle?.getString("imagen")
 
 
         setupUI()

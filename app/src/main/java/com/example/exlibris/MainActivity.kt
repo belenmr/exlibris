@@ -1,28 +1,23 @@
 package com.example.exlibris
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.preference.PreferenceManager
-import android.text.Editable
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exlibris.adapter.BookAdapter
 import com.example.exlibris.data.Book
+import com.example.exlibris.db.BookDao
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.toolbar.*
 
 const val CAMBIAR_NOMBRE = "CambiarNombre"
 
 class MainActivity : AppCompatActivity() {
 
-    var books: List<Book> = listOf()
 
     private lateinit var fabAddBook: FloatingActionButton
 
@@ -36,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupUI()
-        initRecycler()
     }
 
     private fun setupUI() {
@@ -67,9 +61,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     override fun onResume() {
         super.onResume()
         cambiarTitulo()
+        initRecycler()
     }
 
     private fun cambiarTitulo(){
@@ -85,7 +81,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initRecycler(){
+        var books = BookDao(this).getBook()
         rvBooks.layoutManager = LinearLayoutManager(this)
         val adapter = BookAdapter(books)
+        rvBooks.adapter = adapter
     }
+
 }
