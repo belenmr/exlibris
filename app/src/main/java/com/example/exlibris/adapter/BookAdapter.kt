@@ -37,10 +37,13 @@ class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookH
             view.ivBook.setImageBitmap(BitmapFactory.decodeFile(books.resImage))
             view.setOnClickListener{
                 val intent = Intent(view.context,BookActivity::class.java)
-                intent.putExtra("titulo", view.tvTitulo.getText());
-                intent.putExtra("autor", view.tvAutor.getText());
-                // para las imágenes de esta forma:
-                intent.putExtra("imagen", books.resImage);
+                intent.putExtra("titulo", view.tvTitulo.getText())
+                intent.putExtra("autor", view.tvAutor.getText())
+                intent.putExtra("imagen", books.resImage)
+                intent.putExtra("editorial",books.publishingHouse)
+                intent.putExtra("ISBN", books.isbn)
+                intent.putExtra("leido",books.read)
+                intent.putExtra("id",books.id)
                 view.getContext().startActivity(intent)
             }
 
