@@ -46,6 +46,10 @@ class PreferenceActivity : AppCompatActivity() {
         {
             supportActionBar?.title  = "La Biblioteca De $nombre"
         }
+        else
+        {
+            supportActionBar?.title = "Mi Biblioteca"
+        }
 
     }
 

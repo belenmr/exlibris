@@ -24,7 +24,15 @@ class AboutMeActivity : AppCompatActivity() {
     }
 
     private fun cambiarTitulo(){
-        val nombre = preferences.getString(com.example.exlibris.CAMBIAR_NOMBRE, "Mi Biblioteca")
-        supportActionBar?.title = "La Biblioteca De $nombre"
+        val nombre = preferences.getString(CAMBIAR_NOMBRE,"Mi Biblioteca")
+
+        if (nombre != "Mi Biblioteca")
+        {
+            supportActionBar?.title  = "La Biblioteca De $nombre"
+        }
+        else
+        {
+            supportActionBar?.title = "Mi Biblioteca"
+        }
     }
 }
