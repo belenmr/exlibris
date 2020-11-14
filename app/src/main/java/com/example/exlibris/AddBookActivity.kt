@@ -1,11 +1,16 @@
 package com.example.exlibris
 
+import android.app.PendingIntent
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.example.exlibris.data.Book
+import com.example.exlibris.notifications.BookNotif
 import com.example.exlibris.utils.Camera
 import com.example.exlibris.utils.Keyboard
 import com.google.android.material.textfield.TextInputEditText
@@ -65,6 +70,28 @@ class AddBookActivity : AppCompatActivity() {
         camera?.requestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    private fun showNotification(book: Book) {
+        BookNotif.createNotificationForNewBook(this)
 
+        val intent = Intent(this, BookActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            putExtra("", book)
+        }
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
+        NotificationCompat.Builder(this, BookNotif.NEW_BOOK_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Nuevo Libro Agregado")
+                .setContentText("Ingrese y observe el nuevo libro")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build()
+                .also { notification ->
+                    NotificationManagerCompat
+                            .from(this)
+                            .notify(1, notification)
+                }
+    }
 
 }

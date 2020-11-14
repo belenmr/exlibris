@@ -1,11 +1,16 @@
 package com.example.exlibris.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.exlibris.AddBookActivity
+import com.example.exlibris.BookActivity
 import com.example.exlibris.R
 import com.example.exlibris.data.Book
+import com.example.exlibris.preferences.PreferenceActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_books.view.*
 
@@ -25,10 +30,13 @@ class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookH
     class BookHolder(val view:View):RecyclerView.ViewHolder(view) {
         fun render (books:Book){
             view.tvTitulo.text = books.name
-            view.tvAutor.text = books.nameAuthor
+            view.tvAutor.text = books.author
             Picasso.get().load(books.resImage).into(view.ivBook)
         }
 
     }
+
+
+
 
 }
