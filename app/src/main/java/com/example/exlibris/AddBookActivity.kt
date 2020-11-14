@@ -63,16 +63,12 @@ class AddBookActivity : AppCompatActivity() {
             val book = createBook()
             BookDao(this@AddBookActivity.applicationContext).addBook(book)
             showNotification(book)
-            launchMainActivity()
         }
         Keyboard.hideKeyboard(this)
+        finish()
     }
 
-    private fun launchMainActivity(){
-        startActivity(
-            Intent(this, MainActivity::class.java)
-        )
-    }
+
 
     private fun validateData() {
         validateField(etName)
