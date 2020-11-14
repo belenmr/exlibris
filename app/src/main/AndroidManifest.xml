@@ -18,9 +18,9 @@
         android:theme="@style/Theme.Exlibris">
         <activity android:name=".preferences.AboutMeActivity"></activity>
         <activity android:name=".preferences.PreferenceActivity"></activity>
-        <activity android:name=".SplashScreenActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".BookActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
