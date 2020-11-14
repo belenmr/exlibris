@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 class Book (
     @DatabaseField(columnName = "ImageResource")
-    val resImage: Int,
+    val resImage: String,
     @DatabaseField
     val name: String,
     @DatabaseField
@@ -19,11 +19,9 @@ class Book (
     @DatabaseField
     val isbn: String,
     @DatabaseField
-    val read: Boolean?,
-    @DatabaseField
-    val scoore: Int?,
+    val read: Boolean = false,
     @DatabaseField(id = true)
     val id: Int? = null
 ) : Parcelable {
-    constructor() : this(0,"","","","",false,null)
+    constructor() : this("","","","","",false,null)
 }

@@ -7,7 +7,6 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primaryColor"
@@ -111,35 +110,22 @@
                 android:layout_height="wrap_content"
                 android:hint="ISBN"
                 android:inputType="text"
-                android:singleLine="true"
-                android:textColor="#FFFFFF" />
+                android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <CheckBox
-            android:id="@+id/checkRead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:buttonTint="@color/secondaryColor"
-            android:checked="false"
-            android:text="Leido"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutISBN" />
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="40dp"
             android:backgroundTint="@color/secondaryDarkColor"
             android:text="Guardar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkRead" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutISBN" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

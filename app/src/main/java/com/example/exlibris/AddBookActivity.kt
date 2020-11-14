@@ -4,29 +4,32 @@ import android.app.PendingIntent
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ImageView
+import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.exlibris.data.Book
+import com.example.exlibris.db.BookDao
 import com.example.exlibris.notifications.BookNotif
 import com.example.exlibris.utils.Camera
 import com.example.exlibris.utils.Keyboard
 import com.google.android.material.textfield.TextInputEditText
 
 
+
 class AddBookActivity : AppCompatActivity() {
 
     private lateinit var etName: TextInputEditText
-    private lateinit var etNameAuthor: TextInputEditText
+    private lateinit var etAuthor: TextInputEditText
     private lateinit var etPublishingHouse: TextInputEditText
     private lateinit var etISBN: TextInputEditText
-    private lateinit var checkRead: CheckBox
+
     private lateinit var camera: Camera
     private lateinit var ivBookCover: ImageView
     private lateinit var btnSave: Button
     private lateinit var btnTakePhoto: Button
+    private lateinit var pathBookCover: String
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +40,10 @@ class AddBookActivity : AppCompatActivity() {
 
     private fun setupUI() {
         etName = findViewById(R.id.etName)
-        etNameAuthor = findViewById(R.id.etAuthor)
+        etAuthor = findViewById(R.id.etAuthor)
         etPublishingHouse = findViewById(R.id.etPublishingHouse)
         etISBN = findViewById(R.id.etISBN)
-        checkRead = findViewById(R.id.checkRead)
+
         btnSave = findViewById(R.id.btnSave)
         btnTakePhoto = findViewById(R.id.btnTakePhoto)
         ivBookCover = findViewById(R.id.imgBookCover)
@@ -52,10 +55,47 @@ class AddBookActivity : AppCompatActivity() {
     }
 
     private fun saveBook() {
-        var read = checkRead.isChecked
-
+        pathBookCover = camera.getPath()
+        validateData()
         Keyboard.hideKeyboard(this)
     }
+
+    private fun validateData() {
+        validateField(etName)
+        validateField(etAuthor)
+        validateField(etPublishingHouse)
+        validateField(etISBN)
+        validatePhoto()
+
+
+        if (isDataValid()){
+            val book = createBook()
+            BookDao(this@AddBookActivity.applicationContext).addBook(book)
+            showNotification(book)
+        }
+    }
+
+    private fun createBook(): Book {
+        return Book(
+                pathBookCover,
+                getTextFrom(etName),
+                getTextFrom(etAuthor),
+                getTextFrom(etPublishingHouse),
+                getTextFrom(etISBN)
+        )
+    }
+
+    private fun validatePhoto() = pathBookCover.isNotEmpty()
+
+    private fun validateField(editText: EditText) {
+        if (getTextFrom(editText).isEmpty()) {
+            editText.error = "Fill field"
+        }
+    }
+
+    private fun getTextFrom(editText: EditText) = editText.text.toString()
+
+    private fun isDataValid() = etName.error.isNullOrEmpty() && etAuthor.error.isNullOrEmpty() && etPublishingHouse.error.isNullOrEmpty() && etISBN.error.isNullOrEmpty() && validatePhoto()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

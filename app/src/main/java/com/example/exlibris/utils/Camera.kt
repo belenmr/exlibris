@@ -18,110 +18,117 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Camera(
-        private var activity: Activity,
-        private var imageView: ImageView) {
+    private var activity: Activity,
+    private var imageView: ImageView) {
 
-        private val REQUEST_TAKE_PHOTO = 1
-        private val AUTHORITY = "com.example.exlibris"
-        private val permissionCamera = android.Manifest.permission.CAMERA
-        private val permissionWriteStorage = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-        private val permissionReadStorage = android.Manifest.permission.READ_EXTERNAL_STORAGE
+    private val REQUEST_TAKE_PHOTO = 1
+    private val AUTHORITY = "com.example.exlibris"
+    private val permissionCamera = android.Manifest.permission.CAMERA
+    private val permissionWriteStorage = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+    private val permissionReadStorage = android.Manifest.permission.READ_EXTERNAL_STORAGE
 
-        var urlFotoActual = " "
+    private var pathImageFile = ""
 
-        fun takePhoto(){
-            requestPermission()
+    var urlFotoActual = " "
+
+    fun takePhoto(){
+        requestPermission()
+    }
+
+
+    private fun requestPermission() {
+        ActivityCompat.shouldShowRequestPermissionRationale(activity, permissionCamera)
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            activity.requestPermissions(arrayOf(permissionCamera,permissionWriteStorage,permissionReadStorage), REQUEST_TAKE_PHOTO)
         }
+    }
 
 
-        private fun requestPermission() {
-            ActivityCompat.shouldShowRequestPermissionRationale(activity, permissionCamera)
+    fun requestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
+    ) {
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                activity.requestPermissions(arrayOf(permissionCamera,permissionWriteStorage,permissionReadStorage), REQUEST_TAKE_PHOTO)
-            }
-        }
-
-
-        fun requestPermissionsResult(
-                requestCode: Int,
-                permissions: Array<out String>,
-                grantResults: IntArray
-        ) {
-
-            when(requestCode){
-                REQUEST_TAKE_PHOTO -> {
-                    if(grantResults.isNotEmpty() &&
-                            grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                            grantResults[1] == PackageManager.PERMISSION_GRANTED &&
-                            grantResults[2] == PackageManager.PERMISSION_GRANTED){
-                        //tenemos permiso
-                        dispatchTakePictureIntent()
-                    } else {
-                        //no tenemos permiso
-                        Toast.makeText(activity.applicationContext, "No diste permiso para acceder a la camara y almacenamiento", Toast.LENGTH_SHORT).show()
-                    }
+        when(requestCode){
+            REQUEST_TAKE_PHOTO -> {
+                if(grantResults.isNotEmpty() &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[1] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[2] == PackageManager.PERMISSION_GRANTED){
+                    //tenemos permiso
+                    dispatchTakePictureIntent()
+                } else {
+                    //no tenemos permiso
+                    Toast.makeText(activity.applicationContext, "No diste permiso para acceder a la camara y almacenamiento", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
 
 
-        private fun dispatchTakePictureIntent(){
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+    private fun dispatchTakePictureIntent(){
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-            if(intent.resolveActivity(activity.packageManager) != null){
+        if(intent.resolveActivity(activity.packageManager) != null){
 
-                var archivoFoto: File? = null
-                archivoFoto = createImageFile()
+            var archivoFoto: File? = null
+            archivoFoto = createImageFile()
 
-                if(archivoFoto != null){
-                    var urlFoto = FileProvider.getUriForFile(activity.applicationContext, AUTHORITY, archivoFoto)
+            if(archivoFoto != null){
+                var urlFoto = FileProvider.getUriForFile(activity.applicationContext, AUTHORITY, archivoFoto)
 
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, urlFoto)
-                    activity.startActivityForResult(intent, REQUEST_TAKE_PHOTO)
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, urlFoto)
+                activity.startActivityForResult(intent, REQUEST_TAKE_PHOTO)
+            }
+        }
+    }
+
+
+    fun activityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        when(requestCode){
+            REQUEST_TAKE_PHOTO -> {
+                if(resultCode == AppCompatActivity.RESULT_OK){
+                    //obtener imagen
+                    Log.d("ACTIVITY_RESULT", "obtener imagen")
+                    /*val extras = data?.extras //tiene la info de toda la camara
+                    val imageBitmap = extras?.get("data") as Bitmap
+                    */
+                    showBitmap(urlFotoActual)
+
+                } else {
+                    //se cancelo la captura
                 }
             }
         }
+    }
+
+    private fun showBitmap(url:String){
+        val uri = Uri.parse(url)
+        val stream = activity.contentResolver.openInputStream(uri)
+        val imageBitmap = BitmapFactory.decodeStream(stream)
+        imageView.setImageBitmap(imageBitmap)
+    }
 
 
-        fun activityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    private fun createImageFile(): File{
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val nombreArchivoImagen = "Exlibris_" + timeStamp + "_"
 
-            when(requestCode){
-                REQUEST_TAKE_PHOTO -> {
-                    if(resultCode == AppCompatActivity.RESULT_OK){
-                        //obtener imagen
-                        Log.d("ACTIVITY_RESULT", "obtener imagen")
-                        /*val extras = data?.extras //tiene la info de toda la camara
-                        val imageBitmap = extras?.get("data") as Bitmap
-                        */
-                        showBitmap(urlFotoActual)
+        val directorio = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val imagen = File.createTempFile(nombreArchivoImagen,".jpg",directorio)
 
-                    } else {
-                        //se cancelo la captura
-                    }
-                }
-            }
-        }
+        urlFotoActual = "file://" + imagen.absolutePath //me regresa toda la url de la imagen
+        pathImageFile = imagen.absolutePath
 
-        private fun showBitmap(url:String){
-            val uri = Uri.parse(url)
-            val stream = activity.contentResolver.openInputStream(uri)
-            val imageBitmap = BitmapFactory.decodeStream(stream)
-            imageView.setImageBitmap(imageBitmap)
-        }
+        return imagen
+    }
 
-
-        private fun createImageFile(): File{
-            val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-            val nombreArchivoImagen = "Exlibris_" + timeStamp + "_"
-
-            val directorio = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-            val imagen = File.createTempFile(nombreArchivoImagen,".jpg",directorio)
-
-            urlFotoActual = "file://" + imagen.absolutePath //me regresa toda la url de la imagen
-
-            return imagen
-        }
+    fun getPath(): String {
+        return pathImageFile
+    }
 
 
 }
