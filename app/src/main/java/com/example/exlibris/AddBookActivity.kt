@@ -57,7 +57,21 @@ class AddBookActivity : AppCompatActivity() {
     private fun saveBook() {
         pathBookCover = camera.getPath()
         validateData()
+
+
+        if (isDataValid()){
+            val book = createBook()
+            BookDao(this@AddBookActivity.applicationContext).addBook(book)
+            showNotification(book)
+            launchMainActivity()
+        }
         Keyboard.hideKeyboard(this)
+    }
+
+    private fun launchMainActivity(){
+        startActivity(
+            Intent(this, MainActivity::class.java)
+        )
     }
 
     private fun validateData() {
@@ -68,11 +82,7 @@ class AddBookActivity : AppCompatActivity() {
         validatePhoto()
 
 
-        if (isDataValid()){
-            val book = createBook()
-            BookDao(this@AddBookActivity.applicationContext).addBook(book)
-            showNotification(book)
-        }
+
     }
 
     private fun createBook(): Book {
