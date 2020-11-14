@@ -1,5 +1,6 @@
 package com.example.exlibris
 
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.CheckBox
@@ -32,11 +33,7 @@ class BookActivity : AppCompatActivity() {
 
         tvTituloLibro.text = titulo.toString()
         tvNombreAutor.text = autor.toString()
-        if (imagen != null) {
-            Picasso.get()
-                    .load(imagen)
-                    .into(ivBook)
-        };
+        ivBook.setImageBitmap(BitmapFactory.decodeFile(imagen))
 
     }
 

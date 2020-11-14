@@ -1,6 +1,7 @@
 package com.example.exlibris.adapter
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,7 @@ class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookH
         fun render (books:Book){
             view.tvTitulo.text = books.name
             view.tvAutor.text = books.author
-            Picasso.get().load(books.resImage).into(view.ivBook)
+            view.ivBook.setImageBitmap(BitmapFactory.decodeFile(books.resImage))
             view.setOnClickListener{
                 val intent = Intent(view.context,BookActivity::class.java)
                 intent.putExtra("titulo", view.tvTitulo.getText());
