@@ -3,23 +3,19 @@ package com.example.exlibris
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import com.example.exlibris.data.Book
 import com.example.exlibris.db.BookDao
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_add_book.view.*
-import kotlinx.android.synthetic.main.activity_book.*
 
 class BookActivity : AppCompatActivity() {
 
-    private lateinit var tvTituloLibro : TextView
-    private lateinit var tvNombreAutor : TextView
-    private lateinit var tvEditorial : TextView
+    private lateinit var tvBookName : TextView
+    private lateinit var tvAuthor : TextView
+    private lateinit var tvPublishingHouse : TextView
     private lateinit var tvISBN : TextView
     private lateinit var ivBook : ImageView
-    private lateinit var cbLeido : CheckBox
+    private lateinit var cbRead : CheckBox
     private lateinit var btnBack: Button
     private lateinit var btnEdit: Button
     private lateinit var btnDelete: Button
@@ -28,7 +24,8 @@ class BookActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
 
-        val bundle = intent.extras
+
+        /*
         val titulo = bundle?.getString("titulo")
         val autor = bundle?.getString("autor")
         val imagen = bundle?.getString("imagen")
@@ -36,37 +33,60 @@ class BookActivity : AppCompatActivity() {
         val isbn = bundle?.getString("ISBN")
         val leido = bundle?.getBoolean("leido")
         val id = bundle?.getInt("id")
-
+        */
 
         setupUI()
-
-        tvTituloLibro.text = titulo.toString()
-        tvNombreAutor.text = autor.toString()
-        ivBook.setImageBitmap(BitmapFactory.decodeFile(imagen))
-        tvEditorial.text = editorial.toString()
-        tvISBN.text = isbn.toString()
-
     }
 
     private fun setupUI() {
-        tvTituloLibro = findViewById(R.id.tvTituloLibro)
-        tvNombreAutor = findViewById(R.id.tvNombreAutor)
+        val bundle = intent.extras
+        val book: Book? = intent.getParcelableExtra("BOOK")
+
+        tvBookName = findViewById(R.id.tvBookName)
+        tvAuthor = findViewById(R.id.tvAuthor)
         ivBook = findViewById(R.id.ivBook)
-        tvEditorial = findViewById(R.id.tvEditorial)
+        tvPublishingHouse = findViewById(R.id.tvPublishingHouse)
         tvISBN = findViewById(R.id.tvISBN)
-        cbLeido = findViewById(R.id.cbLeido)
-        cbLeido.isChecked = false
+        cbRead = findViewById(R.id.cbRead)
         btnBack = findViewById(R.id.btnBack)
         btnEdit = findViewById(R.id.btnEdit)
         btnDelete = findViewById(R.id.btnDelete)
 
+        ivBook.setImageBitmap(BitmapFactory.decodeFile(book?.resImage.toString()))
+        cbRead.isChecked = book?.read ?: false
+        tvBookName.text = book?.name.toString()
+        tvAuthor.text = book?.author.toString()
+        tvPublishingHouse.text = book?.publishingHouse.toString()
+        tvISBN.text = book?.isbn.toString()
+
         btnBack.setOnClickListener { backAndSave() }
         btnEdit.setOnClickListener { editBook() }
-        btnDelete.setOnClickListener { deleteBook() }
+        btnDelete.setOnClickListener {
+            if (book != null) {
+                deleteBook(book)
+            }
+        }
     }
 
-    private fun deleteBook() {
-        finish()
+    private fun deleteBook(book: Book) {
+        val builder = AlertDialog.Builder(this)
+        builder
+            .setTitle(book.name)
+            .setMessage("¿Desea elimnarlo?")
+            .setNegativeButton("CANCELAR", { _, _ ->
+                    //showMessage("Accion cancelada")
+                })
+            .setPositiveButton("ELIMINAR", {_,_ ->
+                    BookDao(this@BookActivity.applicationContext).deleteBook(book)
+                    showMessage("Libro eliminado exitosamente")
+                    finish()
+                })
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     private fun editBook() {
