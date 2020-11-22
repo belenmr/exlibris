@@ -58,16 +58,28 @@ class AddBookActivity : AppCompatActivity() {
         pathBookCover = camera.getPath()
         validateData()
 
-
         if (isDataValid()){
             val book = createBook()
             BookDao(this@AddBookActivity.applicationContext).addBook(book)
             showNotification(book)
+            Keyboard.hideKeyboard(this)
+            launchBookActivity(book)
+            finish()
+        } else {
+            showMessage("Debe ingresar datos validos")
         }
-        Keyboard.hideKeyboard(this)
-        finish()
+
     }
 
+    private fun launchBookActivity(book: Book) {
+        val intent = Intent(this, BookActivity::class.java)
+        intent.putExtra("BOOK", book)
+        startActivity(intent)
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(this, message,Toast.LENGTH_LONG).show()
+    }
 
 
     private fun validateData() {
@@ -76,9 +88,6 @@ class AddBookActivity : AppCompatActivity() {
         validateField(etPublishingHouse)
         validateField(etISBN)
         validatePhoto()
-
-
-
     }
 
     private fun createBook(): Book {
