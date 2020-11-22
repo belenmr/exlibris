@@ -8,31 +8,15 @@ import com.example.exlibris.R
 
 class AboutMeActivity : AppCompatActivity() {
 
-    private val preferences: SharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_me)
+
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
         setSupportActionBar(findViewById(R.id.toolbar))
-    }
-
-    override fun onResume() {
-        super.onResume()
-        cambiarTitulo()
-    }
-
-    private fun cambiarTitulo(){
-        val nombre = preferences.getString(CAMBIAR_NOMBRE,"Mi Biblioteca")
-
-        if (nombre != "Mi Biblioteca")
-        {
-            supportActionBar?.title  = "La Biblioteca De $nombre"
-        }
-        else
-        {
-            supportActionBar?.title = "Mi Biblioteca"
-        }
+        supportActionBar?.title  = "Acerca de Exlibris"
     }
 }
