@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-<PreferenceCategory android:title = "Personalizar Toolbar" >
-    <EditTextPreference
-        android:key = "CambiarNombre"
-        android:title = "Cambiar Nombre"
-        android:summary = "Puede cambiar el nombre del titulo"
-        android:inputType="text"
-        android:selectAllOnFocus = "true"
-        android:singleLine ="true"
-    />
-</PreferenceCategory>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Personalizar nombre de la biblioteca">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switchCustomizeNameLib"
+            android:title="Personalizar" />
+        <EditTextPreference
+            android:defaultValue="false"
+            android:inputType="text"
+            android:key="OwnerName"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Puede cambiar el nombre de la biblioteca"
+            android:title="Ingresar tu nombre"
+            app:dependency="switchCustomizeNameLib" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

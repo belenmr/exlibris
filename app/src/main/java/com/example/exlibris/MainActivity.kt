@@ -13,7 +13,6 @@ import com.example.exlibris.db.BookDao
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 
-const val CAMBIAR_NOMBRE = "CambiarNombre"
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,40 +45,44 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.itemSettings) {
-            startActivity(
-                    Intent(this, com.example.exlibris.preferences.PreferenceActivity::class.java)
-            )
+            launchSettings()
         }
+
         if (item.itemId == R.id.itemAboutMe) {
-            startActivity(
-                    Intent(this, com.example.exlibris.preferences.AboutMeActivity::class.java)
-            )}
+            launchAboutMe()
+        }
 
         return super.onOptionsItemSelected(item)
+    }
 
+    private fun launchAboutMe() {
+        startActivity(
+                Intent(this, com.example.exlibris.preferences.AboutMeActivity::class.java)
+        )
+    }
 
+    private fun launchSettings() {
+        startActivity(
+                Intent(this, com.example.exlibris.preferences.PreferenceActivity::class.java)
+        )
     }
 
 
     override fun onResume() {
         super.onResume()
-        cambiarTitulo()
+        handleCustomizeNameLibrary()
         initRecycler()
     }
 
-    private fun cambiarTitulo(){
-        val nombre = preferences.getString(com.example.exlibris.preferences.CAMBIAR_NOMBRE,"Mi Biblioteca")
-
-        if (nombre != "Mi Biblioteca")
-        {
-            supportActionBar?.title  = "La Biblioteca De $nombre"
-        }
-        else
-        {
+    private fun handleCustomizeNameLibrary(){
+        val shouldCustomizeName = preferences.getBoolean("switchCustomizeNameLib", false)
+        val owner = preferences.getString(com.example.exlibris.preferences.LIBRARY_OWNER,"Mi Exlibris")
+        if (shouldCustomizeName && !owner.isNullOrBlank()){
+            supportActionBar?.title  = "Biblioteca De $owner"
+        } else {
             supportActionBar?.title = "Mi Biblioteca"
         }
     }
-
 
     private fun launchAddBookActivity(){
         startActivity(
