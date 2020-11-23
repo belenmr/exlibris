@@ -1,5 +1,6 @@
 package com.example.exlibris
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -64,7 +65,11 @@ class BookActivity : AppCompatActivity() {
                 goHome()
             }
         }
-        btnEdit.setOnClickListener { editBook() }
+        btnEdit.setOnClickListener {
+            if (book != null) {
+                editBook(book)
+            }
+        }
         btnDelete.setOnClickListener {
             if (book != null) {
                 deleteBook(book)
@@ -104,8 +109,11 @@ class BookActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    private fun editBook() {
-        TODO("Not yet implemented")
+    private fun editBook(book: Book) {
+        startActivity(
+            Intent(this, EditBookActivity::class.java)
+                .putExtra("BOOK",book)
+        )
     }
 
     private fun goHome() {
