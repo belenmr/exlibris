@@ -130,7 +130,7 @@ class AddBookActivity : AppCompatActivity() {
 
         val intent = Intent(this, BookActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            putExtra("", book)
+            putExtra("BOOK", book)
         }
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 

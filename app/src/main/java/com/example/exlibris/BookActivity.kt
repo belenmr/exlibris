@@ -16,7 +16,7 @@ class BookActivity : AppCompatActivity() {
     private lateinit var tvISBN : TextView
     private lateinit var ivBook : ImageView
     private lateinit var cbRead : CheckBox
-    private lateinit var btnBack: Button
+    private lateinit var btnGoHome: Button
     private lateinit var btnEdit: Button
     private lateinit var btnDelete: Button
 
@@ -40,7 +40,7 @@ class BookActivity : AppCompatActivity() {
 
     private fun setupUI() {
         val bundle = intent.extras
-        val book: Book? = intent.getParcelableExtra("BOOK")
+        var book: Book? = intent.getParcelableExtra("BOOK")
 
         tvBookName = findViewById(R.id.tvBookName)
         tvAuthor = findViewById(R.id.tvAuthor)
@@ -48,7 +48,7 @@ class BookActivity : AppCompatActivity() {
         tvPublishingHouse = findViewById(R.id.tvPublishingHouse)
         tvISBN = findViewById(R.id.tvISBN)
         cbRead = findViewById(R.id.cbRead)
-        btnBack = findViewById(R.id.btnBack)
+        btnGoHome = findViewById(R.id.btnGoHome)
         btnEdit = findViewById(R.id.btnEdit)
         btnDelete = findViewById(R.id.btnDelete)
 
@@ -59,13 +59,28 @@ class BookActivity : AppCompatActivity() {
         tvPublishingHouse.text = book?.publishingHouse.toString()
         tvISBN.text = book?.isbn.toString()
 
-        btnBack.setOnClickListener { backAndSave() }
+        btnGoHome.setOnClickListener {
+            if (book != null) {
+                goHome()
+            }
+        }
         btnEdit.setOnClickListener { editBook() }
         btnDelete.setOnClickListener {
             if (book != null) {
                 deleteBook(book)
             }
         }
+
+        cbRead.setOnCheckedChangeListener { cbRead, isChecked ->
+            if (book != null && isChecked != book.read) {
+                book.read = cbRead.isChecked()
+                saveBook(book)
+            }
+        }
+    }
+
+    private fun saveBook(book: Book) {
+        BookDao(this@BookActivity.applicationContext).updateBook(book)
     }
 
     private fun deleteBook(book: Book) {
@@ -93,7 +108,7 @@ class BookActivity : AppCompatActivity() {
         TODO("Not yet implemented")
     }
 
-    private fun backAndSave() {
+    private fun goHome() {
         finish()
     }
 

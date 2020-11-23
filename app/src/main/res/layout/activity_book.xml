@@ -99,7 +99,7 @@
             tools:text="9891231512131231587" />
 
         <Button
-            android:id="@+id/btnBack"
+            android:id="@+id/btnGoHome"
             android:layout_width="65dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -117,7 +117,7 @@
             android:layout_marginEnd="48dp"
             app:icon="@android:drawable/ic_menu_edit"
             app:layout_constraintEnd_toStartOf="@+id/btnDelete"
-            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintStart_toEndOf="@+id/btnGoHome"
             app:layout_constraintTop_toBottomOf="@+id/tvISBN" />
 
         <Button

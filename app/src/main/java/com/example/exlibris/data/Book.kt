@@ -19,7 +19,7 @@ class Book (
     @DatabaseField
     val isbn: String,
     @DatabaseField
-    val read: Boolean = false,
+    var read: Boolean = false,
     @DatabaseField(id = true)
     val id: Int? = null
 ) : Parcelable {
