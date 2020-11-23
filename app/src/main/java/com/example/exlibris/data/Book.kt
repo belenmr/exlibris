@@ -11,13 +11,13 @@ class Book (
     @DatabaseField(columnName = "ImageResource")
     val resImage: String,
     @DatabaseField
-    val name: String,
+    var name: String,
     @DatabaseField
-    val author: String,
+    var author: String,
     @DatabaseField
-    val publishingHouse: String,
+    var publishingHouse: String,
     @DatabaseField
-    val isbn: String,
+    var isbn: String,
     @DatabaseField
     var read: Boolean = false,
     @DatabaseField(id = true)

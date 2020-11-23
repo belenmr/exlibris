@@ -1,5 +1,6 @@
 package com.example.exlibris
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -57,10 +58,25 @@ class EditBookActivity : AppCompatActivity() {
 
     private fun updateBook(book: Book) {
         if (validationData()){
+            setBook(book)
             BookDao(this@EditBookActivity.applicationContext).updateBook(book)
             finish()
+            launchBookActivity(book)
         }
+    }
 
+    private fun launchBookActivity(book: Book) {
+        startActivity(
+            Intent(this, BookActivity::class.java)
+                .putExtra("BOOK",book)
+        )
+    }
+
+    private fun setBook(book: Book) {
+        book.name = etName.text.toString()
+        book.author = etAuthor.text.toString()
+        book.publishingHouse = etPublishingHouse.text.toString()
+        book.isbn = etISBN.text.toString()
     }
 
     private fun validationData(): Boolean {

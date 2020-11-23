@@ -114,11 +114,13 @@ class BookActivity : AppCompatActivity() {
             Intent(this, EditBookActivity::class.java)
                 .putExtra("BOOK",book)
         )
+        finish()
     }
 
     private fun goHome() {
         finish()
     }
+
 
 
 
