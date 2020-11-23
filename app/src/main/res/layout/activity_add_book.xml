@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/secondaryDarkColor"
-            android:text="Agregar portada"
+            android:text="@string/button_take_photo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgBookCover" />
@@ -52,8 +52,7 @@
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:hint="Titulo"
+                android:hint="@string/field_book_name"
                 android:inputType="text"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -71,8 +70,7 @@
                 android:id="@+id/etAuthor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:hint="Nombre y apellido del autor"
+                android:hint="@string/field_author"
                 android:inputType="text"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -90,7 +88,7 @@
                 android:id="@+id/etPublishingHouse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Editorial"
+                android:hint="@string/field_publishing_house"
                 android:inputType="text"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +106,7 @@
                 android:id="@+id/etISBN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ISBN"
+                android:hint="@string/field_isbn"
                 android:inputType="text"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -121,7 +119,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/secondaryDarkColor"
-            android:text="Guardar"
+            android:text="@string/button_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"

@@ -3,11 +3,12 @@ package com.example.exlibris.preferences
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceManager
 import com.example.exlibris.R
 
 const val LIBRARY_OWNER = "OwnerName"
+const val SWITCH_CUSTOMIZE = "switchCustomizeNameLibrary"
+const val PREFERENCE_TOOLBAR = "Configuraciones"
 
 class PreferenceActivity : AppCompatActivity() {
 
@@ -30,7 +31,7 @@ class PreferenceActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.title = "Configuraciones"
+        supportActionBar?.title = PREFERENCE_TOOLBAR
     }
 
     private fun showPreferencesFragment() {

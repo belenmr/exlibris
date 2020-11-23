@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.preference.PreferenceManager
 import com.example.exlibris.R
 
+const val ABOUT_ME_TOOLBAR = "Acerca de"
+
 class AboutMeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +19,6 @@ class AboutMeActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.title  = "Acerca de Exlibris"
+        supportActionBar?.title  = ABOUT_ME_TOOLBAR
     }
 }

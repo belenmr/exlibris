@@ -2,19 +2,19 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="Personalizar nombre de la biblioteca">
+    <PreferenceCategory android:title="@string/preference_category_title">
         <SwitchPreference
             android:defaultValue="false"
             android:key="switchCustomizeNameLib"
-            android:title="Personalizar" />
+            android:title="@string/switch_preference_title" />
         <EditTextPreference
             android:defaultValue="false"
             android:inputType="text"
             android:key="OwnerName"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:summary="Puede cambiar el nombre de la biblioteca"
-            android:title="Ingresar tu nombre"
+            android:summary="@string/edit_text_preference_summary"
+            android:title="@string/edit_text_preference_title"
             app:dependency="switchCustomizeNameLib" />
     </PreferenceCategory>
 

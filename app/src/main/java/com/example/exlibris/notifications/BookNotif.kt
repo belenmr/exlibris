@@ -10,8 +10,7 @@ object BookNotif {
 
     const val NEW_BOOK_ID = "1"
     private const val NEW_BOOK_NAME = "Nuevo Libro"
-    private const val NEW_BOOK_DESCRIPTION =
-            "Se han agregado nuevos libros a la lista"
+    private const val NEW_BOOK_DESCRIPTION = "Se han agregado nuevos libros a la lista"
 
     fun createNotificationForNewBook(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

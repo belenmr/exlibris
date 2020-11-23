@@ -10,9 +10,14 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exlibris.adapter.BookAdapter
 import com.example.exlibris.db.BookDao
+import com.example.exlibris.preferences.LIBRARY_OWNER
+import com.example.exlibris.preferences.SWITCH_CUSTOMIZE
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 
+const val DEF_TOOLBAR = "Mi Biblioteca"
+const val CUSTOMIZED_TOOBAR = "Biblioteca de "
+const val DEF_VALUE_OWNER = "Mi Exlibris"
 
 class MainActivity : AppCompatActivity() {
 
@@ -75,12 +80,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleCustomizeNameLibrary(){
-        val shouldCustomizeName = preferences.getBoolean("switchCustomizeNameLib", false)
-        val owner = preferences.getString(com.example.exlibris.preferences.LIBRARY_OWNER,"Mi Exlibris")
+        val shouldCustomizeName = preferences.getBoolean(SWITCH_CUSTOMIZE, false)
+        val owner = preferences.getString(LIBRARY_OWNER, DEF_VALUE_OWNER)
         if (shouldCustomizeName && !owner.isNullOrBlank()){
-            supportActionBar?.title  = "Biblioteca De $owner"
+            supportActionBar?.title  = CUSTOMIZED_TOOBAR + owner
         } else {
-            supportActionBar?.title = "Mi Biblioteca"
+            supportActionBar?.title = DEF_TOOLBAR
         }
     }
 

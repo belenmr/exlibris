@@ -29,7 +29,7 @@
             android:layout_width="83dp"
             android:layout_height="46dp"
             android:layout_marginTop="24dp"
-            android:text="Leido"
+            android:text="@string/checkbox_read"
             android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cbRead"
-            tools:text="Los Juegos Del Hambre" />
+            tools:text="@string/sample_book_name" />
 
         <TextView
             android:id="@+id/tvAuthor"
@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvBookName"
-            tools:text="Suzanne Collins" />
+            tools:text="@string/sample_author" />
 
         <TextView
             android:id="@+id/tvPublishingHouse"
@@ -80,7 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAuthor"
-            tools:text="Scholastic Press" />
+            tools:text="@string/sample_publishing_house" />
 
         <TextView
             android:id="@+id/tvISBN"
@@ -96,7 +96,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPublishingHouse"
-            tools:text="9891231512131231587" />
+            tools:text="@string/sample_isbn" />
 
         <Button
             android:id="@+id/btnGoHome"

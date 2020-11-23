@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Exlibris</string>
+
+    <string name="toolbar_default_name">Mi Biblioteca</string>
+
+    <string name="button_take_photo">Agregar portada</string>
+    <string name="field_book_name">Titulo</string>
+    <string name="field_author">Nombre y apellido del autor</string>
+    <string name="field_publishing_house">Editorial</string>
+    <string name="field_isbn">ISBN</string>
+    <string name="checkbox_read">Leido</string>
+
+    <!-- Buttons -->
+    <string name="button_save">Guardar</string>
+    <string name="button_cancel">Cancelar</string>
+
+    <!-- Preference -->
+    <string name="preference_category_title">Personalizar nombre de la biblioteca</string>
+    <string name="switch_preference_title">Personalizar</string>
+    <string name="edit_text_preference_summary">Puede cambiar el nombre de la biblioteca</string>
+    <string name="edit_text_preference_title">Ingresa tu nombre</string>
+
+    <!-- About me -->
+    <string name="text_about_me">Aplicacion donde puedes archivar los libros que posees con una imagen que los identifiquen sacados por vos mismo, esta aplicacion fue creada por Belen Medina Roldán y Cristian Alejandro Rojas</string>
+    <string name="app_repository">Repository: https://github.com/belenmr/exlibris</string>
+
+    <!-- Sample book -->
+    <string name="sample_book_name">Los Juegos Del Hambre</string>
+    <string name="sample_author">Suzanne Collins</string>
+    <string name="sample_publishing_house">Scholastic Press</string>
+    <string name="sample_isbn">9891231512131231587</string>
+
 </resources>

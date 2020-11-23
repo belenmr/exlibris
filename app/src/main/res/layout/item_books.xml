@@ -16,10 +16,10 @@
         android:orientation="vertical">
         
         <TextView
-            android:id="@+id/tvTitulo"
+            android:id="@+id/tv_Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text = "Los Juegos Del Hambre"
+            tools:text = "@string/sample_book_name"
             android:textSize="21sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
@@ -27,10 +27,10 @@
             />
 
         <TextView
-            android:id="@+id/tvAutor"
+            android:id="@+id/tv_Author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text = "Suzanne Collins"
+            tools:text = "@string/sample_author"
             android:textSize="18sp"
             android:textStyle="italic"
             android:layout_gravity="center_horizontal"
