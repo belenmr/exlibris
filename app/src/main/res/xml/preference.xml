@@ -5,17 +5,17 @@
     <PreferenceCategory android:title="@string/preference_category_title">
         <SwitchPreference
             android:defaultValue="false"
-            android:key="switchCustomizeNameLib"
+            android:key="switchCustomizeNameLibrary"
             android:title="@string/switch_preference_title" />
         <EditTextPreference
-            android:defaultValue="false"
+            android:defaultValue="Exlibris"
             android:inputType="text"
             android:key="OwnerName"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="@string/edit_text_preference_summary"
             android:title="@string/edit_text_preference_title"
-            app:dependency="switchCustomizeNameLib" />
+            app:dependency="switchCustomizeNameLibrary" />
     </PreferenceCategory>
 
 </PreferenceScreen>
