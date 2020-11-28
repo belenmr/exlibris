@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.exlibris.adapter.COMPLETED_BOOK
 import com.example.exlibris.data.Book
 import com.example.exlibris.db.BookDao
 
@@ -25,22 +26,11 @@ class BookActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
 
-
-        /*
-        val titulo = bundle?.getString("titulo")
-        val autor = bundle?.getString("autor")
-        val imagen = bundle?.getString("imagen")
-        val editorial = bundle?.getString("editorial")
-        val isbn = bundle?.getString("ISBN")
-        val leido = bundle?.getBoolean("leido")
-        val id = bundle?.getInt("id")
-        */
-
         setupUI()
     }
 
     private fun setupUI() {
-        var book: Book? = intent.getParcelableExtra("Book")
+        var book: Book? = intent.getParcelableExtra(COMPLETED_BOOK)
 
         tvBookName = findViewById(R.id.tvBookName)
         tvAuthor = findViewById(R.id.tvAuthor)
@@ -111,7 +101,7 @@ class BookActivity : AppCompatActivity() {
     private fun editBook(book: Book) {
         startActivity(
             Intent(this, EditBookActivity::class.java)
-                .putExtra("BOOK",book)
+                .putExtra(COMPLETED_BOOK,book)
         )
         finish()
     }

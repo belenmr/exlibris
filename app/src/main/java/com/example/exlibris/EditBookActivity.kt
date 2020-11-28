@@ -8,6 +8,7 @@ import android.text.Editable
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import com.example.exlibris.adapter.COMPLETED_BOOK
 import com.example.exlibris.data.Book
 import com.example.exlibris.db.BookDao
 import com.google.android.material.textfield.TextInputEditText
@@ -30,7 +31,7 @@ class EditBookActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        var book: Book? = intent.getParcelableExtra("BOOK")
+        var book: Book? = intent.getParcelableExtra(COMPLETED_BOOK)
 
         imgBook = findViewById(R.id.imgBook)
         etName = findViewById(R.id.etName)
@@ -68,7 +69,7 @@ class EditBookActivity : AppCompatActivity() {
     private fun launchBookActivity(book: Book) {
         startActivity(
             Intent(this, BookActivity::class.java)
-                .putExtra("BOOK",book)
+                .putExtra(COMPLETED_BOOK,book)
         )
     }
 

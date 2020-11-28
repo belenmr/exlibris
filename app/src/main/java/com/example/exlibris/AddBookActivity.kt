@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.exlibris.adapter.COMPLETED_BOOK
 import com.example.exlibris.data.Book
 import com.example.exlibris.db.BookDao
 import com.example.exlibris.notifications.BookNotif
@@ -73,7 +74,7 @@ class AddBookActivity : AppCompatActivity() {
 
     private fun launchBookActivity(book: Book) {
         val intent = Intent(this, BookActivity::class.java)
-        intent.putExtra("BOOK", book)
+        intent.putExtra(COMPLETED_BOOK, book)
         startActivity(intent)
     }
 
@@ -130,7 +131,7 @@ class AddBookActivity : AppCompatActivity() {
 
         val intent = Intent(this, BookActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            putExtra("BOOK", book)
+            putExtra(COMPLETED_BOOK, book)
         }
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 

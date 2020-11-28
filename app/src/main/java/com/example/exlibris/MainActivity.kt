@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 const val DEF_TOOLBAR = "Mi Biblioteca"
 const val CUSTOMIZED_TOOBAR = "Biblioteca de "
-const val DEF_VALUE_OWNER = "Mi Exlibris"
+const val DEF_VALUE_OWNER = "Exlibris"
 
 class MainActivity : AppCompatActivity() {
 

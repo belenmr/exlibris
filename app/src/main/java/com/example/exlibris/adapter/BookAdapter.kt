@@ -11,7 +11,7 @@ import com.example.exlibris.R
 import com.example.exlibris.data.Book
 import kotlinx.android.synthetic.main.item_books.view.*
 
-const val EXTRA_NAME_BOOK = "Book"
+const val COMPLETED_BOOK = "Book"
 
 class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookHolder>(){
 
@@ -34,13 +34,7 @@ class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookH
             view.ivBook.setImageBitmap(BitmapFactory.decodeFile(books.resImage))
             view.setOnClickListener{
                 val intent = Intent(view.context,BookActivity::class.java)
-                intent.putExtra(EXTRA_NAME_BOOK, books)
-                //intent.putExtra("autor", view.tvAutor.getText())
-                //intent.putExtra("imagen", books.resImage)
-                //intent.putExtra("editorial",books.publishingHouse)
-                //intent.putExtra("ISBN", books.isbn)
-                //intent.putExtra("leido",books.read)
-                //intent.putExtra("id",books.id)
+                intent.putExtra(COMPLETED_BOOK, books)
                 view.getContext().startActivity(intent)
             }
         }
