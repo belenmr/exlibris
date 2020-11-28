@@ -40,8 +40,7 @@ class BookActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        val bundle = intent.extras
-        var book: Book? = intent.getParcelableExtra("BOOK")
+        var book: Book? = intent.getParcelableExtra("Book")
 
         tvBookName = findViewById(R.id.tvBookName)
         tvAuthor = findViewById(R.id.tvAuthor)

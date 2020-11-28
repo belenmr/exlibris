@@ -135,7 +135,7 @@ class AddBookActivity : AppCompatActivity() {
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         NotificationCompat.Builder(this, BookNotif.NEW_BOOK_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher_exlibris)
                 .setContentTitle("Nuevo Libro Agregado")
                 .setContentText("Ingrese y observe el nuevo libro")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
