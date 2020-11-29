@@ -62,9 +62,9 @@ class AddBookActivity : AppCompatActivity() {
         if (isDataValid()){
             val book = createBook()
             BookDao(this@AddBookActivity.applicationContext).addBook(book)
-            showNotification(book)
             Keyboard.hideKeyboard(this)
             launchBookActivity(book)
+            showNotification(book)
             finish()
         } else {
             showMessage("Debe ingresar datos validos")
@@ -129,16 +129,15 @@ class AddBookActivity : AppCompatActivity() {
     private fun showNotification(book: Book) {
         BookNotif.createNotificationForNewBook(this)
 
-        val intent = Intent(this, BookActivity::class.java).apply {
+        val intent = Intent(this, MainActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            putExtra(COMPLETED_BOOK, book)
         }
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         NotificationCompat.Builder(this, BookNotif.NEW_BOOK_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_exlibris)
                 .setContentTitle("Nuevo Libro Agregado")
-                .setContentText("Ingrese y observe el nuevo libro")
+                .setContentText("Ingrese y observe el catalogo actualizado")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
