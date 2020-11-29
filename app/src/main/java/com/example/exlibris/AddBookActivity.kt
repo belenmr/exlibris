@@ -60,9 +60,10 @@ class AddBookActivity : AppCompatActivity() {
         validateData()
 
         if (isDataValid()){
-            val book = createBook()
+            var book = createBook()
             BookDao(this@AddBookActivity.applicationContext).addBook(book)
             Keyboard.hideKeyboard(this)
+            book = BookDao(this@AddBookActivity.applicationContext).getBook(book.resImage)
             launchBookActivity(book)
             showNotification(book)
             finish()

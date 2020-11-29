@@ -22,6 +22,10 @@ class BookDao(private val context: Context) {
 
     fun getBooks() = dao.queryForAll()
 
-    fun getBook(bookId: Int) = dao.queryForId(bookId)
+    fun getBookForId(bookId: Int) = dao.queryForId(bookId)
+
+    fun getBook(book: Book) = dao.queryForMatching(book)
+
+    fun getBook(pathImg: String) = dao.queryBuilder().where().eq("ImageResource", pathImg).queryForFirst()
 
 }
