@@ -29,5 +29,6 @@
     <string name="sample_author">Suzanne Collins</string>
     <string name="sample_publishing_house">Scholastic Press</string>
     <string name="sample_isbn">9891231512131231587</string>
+    <string name="push_notif_channel_id">2</string>
 
 </resources>

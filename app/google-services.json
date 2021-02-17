@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "716390563195",
+    "project_id": "exlibris-832ad",
+    "storage_bucket": "exlibris-832ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716390563195:android:42dc163969dd462b3bd1de",
+        "android_client_info": {
+          "package_name": "com.example.exlibris"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716390563195-avc0tqcd45k1r6ia147mmhu8rrillknh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzX_tIa7qXpWS4w8dFYN2d4ZtyPiMdtmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716390563195-avc0tqcd45k1r6ia147mmhu8rrillknh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

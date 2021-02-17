@@ -4,15 +4,20 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exlibris.adapter.BookAdapter
 import com.example.exlibris.db.BookDao
 import com.example.exlibris.preferences.LIBRARY_OWNER
 import com.example.exlibris.preferences.SWITCH_CUSTOMIZE
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val DEF_TOOLBAR = "Mi Biblioteca"
@@ -32,8 +37,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        printFirebaseToken()
         setupUI()
+    }
+
+    private fun printFirebaseToken() {
+        val TAG = "TOKEN LIBRIS"
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+
+            val token = task.result
+
+            Log.d(TAG, token.orEmpty())
+
+        })
     }
 
     private fun setupUI() {
