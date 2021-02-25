@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_exlibris_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Exlibris">
-        <activity android:name=".EditBookActivity"></activity>
+        <activity android:name=".ui.RegisterActivity"></activity>
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".EditBookActivity" />
         <activity android:name=".preferences.AboutMeActivity" />
         <activity android:name=".preferences.PreferenceActivity" />
         <activity android:name=".MainActivity" />
@@ -47,16 +49,12 @@
             </intent-filter>
         </service>
 
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/icono_de_github" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/push_notif_channel_id" />
-
     </application>
-
-
 
 </manifest>

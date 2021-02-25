@@ -24,6 +24,22 @@
     <string name="text_about_me">Aplicacion donde puedes archivar los libros que posees con una imagen que los identifiquen sacados por vos mismo, esta aplicacion fue creada por Belen Medina Roldán y Cristian Alejandro Rojas</string>
     <string name="app_repository">Repository: https://github.com/belenmr/exlibris</string>
 
+    <!--Login-->
+    <string name="usuario">Usuario</string>
+    <string name="password">Password</string>
+    <string name="password2">Ingrese Password De Nuevo</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="login">Login</string>
+    <string name="cancel">Cancelar</string>
+    <string name="error_login">Error al iniciar, corrobore sus datos</string>
+    <string name="error_login_usuario">Falta completar campo usuario</string>
+    <string name="error_login_password">Falta completar campo password</string>
+    <string name="error_login_password2">Falta completar campo password2</string>
+    <string name="error_registro_usuario">Complete el campo usuario</string>
+    <string name="error_registro_password1">Complete la contraseña, debe ser mayor a 4 caracteres</string>
+    <string name="error_registro_password2">El reingreso de la contraseña no coincide</string>
+    <string name="error_registro">Error al registrarse, vuelva a intentarlo</string>
+
     <!-- Sample book -->
     <string name="sample_book_name">Los Juegos Del Hambre</string>
     <string name="sample_author">Suzanne Collins</string>
