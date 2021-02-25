@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -14,7 +15,8 @@ import com.example.exlibris.notifications.BookNotif
 import com.example.exlibris.utils.Camera
 import com.example.exlibris.utils.Keyboard
 import com.google.android.material.textfield.TextInputEditText
-
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 
 
 class AddBookActivity : AppCompatActivity() {
@@ -61,9 +63,27 @@ class AddBookActivity : AppCompatActivity() {
 
         if (isDataValid()){
             var book = createBook()
-            BookDao(this@AddBookActivity.applicationContext).addBook(book)
+            BookDao(this@AddBookActivity.applicationContext)
+                .addBook(book)
+                .subscribe()
             Keyboard.hideKeyboard(this)
-            book = BookDao(this@AddBookActivity.applicationContext).getBook(book.resImage)
+            BookDao(this)
+                .getBook(book.resImage)
+                .subscribe(object : SingleObserver<Book> {
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onSuccess(t: Book) {
+                        book = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.i("AddBookActivity", "Error al obtener libro", e)
+                    }
+
+
+                })
             launchBookActivity(book)
             showNotification(book)
             finish()

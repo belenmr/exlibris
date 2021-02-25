@@ -74,7 +74,9 @@ class BookActivity : AppCompatActivity() {
     }
 
     private fun saveBook(book: Book) {
-        BookDao(this@BookActivity.applicationContext).updateBook(book)
+        BookDao(this@BookActivity.applicationContext)
+            .updateBook(book)
+            .subscribe()
     }
 
     private fun deleteBook(book: Book) {
@@ -86,7 +88,9 @@ class BookActivity : AppCompatActivity() {
                     //showMessage("Accion cancelada")
                 })
             .setPositiveButton("ELIMINAR", {_,_ ->
-                    BookDao(this@BookActivity.applicationContext).deleteBook(book)
+                    BookDao(this@BookActivity.applicationContext)
+                        .deleteBook(book)
+                        .subscribe()
                     showMessage("Libro eliminado exitosamente")
                     finish()
                 })

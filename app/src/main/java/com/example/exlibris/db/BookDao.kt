@@ -4,6 +4,10 @@ import android.content.Context
 import com.example.exlibris.data.Book
 import com.j256.ormlite.android.apptools.OpenHelperManager
 import com.j256.ormlite.dao.Dao
+import io.reactivex.Completable
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class BookDao(private val context: Context) {
@@ -14,18 +18,41 @@ class BookDao(private val context: Context) {
         dao = helper.getDao(Book::class.java)
     }
 
-    fun addBook(book: Book) = dao.create(book)
+    fun addBook(book: Book): Completable {
+        return Completable
+            .fromCallable { dao.create(book) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 
-    fun deleteBook(book: Book) = dao.delete(book)
+    fun deleteBook(book: Book): Completable {
+        return Completable
+            .fromCallable { dao.delete(book) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 
-    fun updateBook(book: Book) = dao.update(book)
+    fun updateBook(book: Book): Completable {
+        return Completable
+            .fromCallable { dao.update(book) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 
-    fun getBooks() = dao.queryForAll()
+    fun getBooks(): Single<List<Book>> {
+        return Single
+            .fromCallable { dao.queryForAll() }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
-    fun getBookForId(bookId: Int) = dao.queryForId(bookId)
+    }
 
-    fun getBook(book: Book) = dao.queryForMatching(book)
-
-    fun getBook(pathImg: String) = dao.queryBuilder().where().eq("ImageResource", pathImg).queryForFirst()
-
+    fun getBook(pathImg: String): Single<Book> {
+        return Single
+            .fromCallable {
+                dao.queryBuilder().where().eq("ImageResource", pathImg).queryForFirst()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

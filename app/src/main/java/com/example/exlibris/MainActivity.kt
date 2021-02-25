@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exlibris.adapter.BookAdapter
+import com.example.exlibris.data.Book
 import com.example.exlibris.db.BookDao
 import com.example.exlibris.preferences.LIBRARY_OWNER
 import com.example.exlibris.preferences.SWITCH_CUSTOMIZE
@@ -18,6 +19,12 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
+import io.reactivex.Single
+import io.reactivex.SingleObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val DEF_TOOLBAR = "Mi Biblioteca"
@@ -28,7 +35,8 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var fabAddBook: FloatingActionButton
-
+    private val adapter: BookAdapter by lazy { BookAdapter(this) }
+    private val compositeDisposable = CompositeDisposable()
     private val preferences: SharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(this)
     }
@@ -101,13 +109,47 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleCustomizeNameLibrary(){
-        val shouldCustomizeName = preferences.getBoolean(SWITCH_CUSTOMIZE, false)
-        val owner = preferences.getString(LIBRARY_OWNER, DEF_VALUE_OWNER)
-        if (shouldCustomizeName && !owner.isNullOrBlank()){
-            supportActionBar?.title  = CUSTOMIZED_TOOBAR + owner
-        } else {
-            supportActionBar?.title = DEF_TOOLBAR
-        }
+        var owner = DEF_VALUE_OWNER
+
+        Single.fromCallable { preferences.getString(LIBRARY_OWNER, DEF_VALUE_OWNER) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : SingleObserver<String?> {
+                override fun onSubscribe(d: Disposable) {
+                    compositeDisposable.add(d)
+                }
+
+                override fun onSuccess(prefOwner: String) {
+                    owner = prefOwner
+                }
+
+                override fun onError(e: Throwable) {
+                    Log.i("MainActivity", "Error al obtener preferencias - LibraryOwner", e)
+                }
+
+            })
+
+        Single.fromCallable { preferences.getBoolean(SWITCH_CUSTOMIZE, false) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object: SingleObserver<Boolean>{
+                override fun onSubscribe(d: Disposable) {
+                    compositeDisposable.add(d)
+                }
+
+                override fun onSuccess(shouldCustomizeName: Boolean) {
+                    if (shouldCustomizeName && !owner.isNullOrBlank()){
+                        supportActionBar?.title  = CUSTOMIZED_TOOBAR + owner
+                    } else {
+                        supportActionBar?.title = DEF_TOOLBAR
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+                    Log.i("MainActivity", "Error al obtener preferencias - shouldCustomizeName", e)
+                }
+
+            })
     }
 
     private fun launchAddBookActivity(){
@@ -117,10 +159,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initRecycler(){
-        var books = BookDao(this).getBooks()
         rvBooks.layoutManager = LinearLayoutManager(this)
-        val adapter = BookAdapter(books)
-        rvBooks.adapter = adapter
+        BookDao(this)
+            .getBooks()
+            .subscribe(object : SingleObserver<List<Book>> {
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onSuccess(books: List<Book>) {
+                    adapter.updateBooks(books)
+                    rvBooks.adapter = adapter
+                }
+
+                override fun onError(e: Throwable) {
+                    Log.i("MainActivity", "Error al obtener la lista de libros", e)
+                }
+            })
     }
 
 }

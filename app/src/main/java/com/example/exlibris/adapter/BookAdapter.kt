@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.exlibris.BookActivity
+import com.example.exlibris.MainActivity
 import com.example.exlibris.R
 import com.example.exlibris.data.Book
 import kotlinx.android.synthetic.main.item_books.view.*
 
 const val COMPLETED_BOOK = "Book"
 
-class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookHolder>(){
+class BookAdapter(val listener: MainActivity):RecyclerView.Adapter<BookAdapter.BookHolder>(){
+
+    private var books: List<Book> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -38,6 +41,15 @@ class BookAdapter(val books : List<Book>):RecyclerView.Adapter<BookAdapter.BookH
                 view.getContext().startActivity(intent)
             }
         }
+    }
+
+    fun updateBooks(books: List<Book>) {
+        this.books = books
+        notifyDataSetChanged()
+    }
+
+    interface BookListener {
+
     }
 
 }

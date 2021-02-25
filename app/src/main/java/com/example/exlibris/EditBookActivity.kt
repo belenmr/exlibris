@@ -60,7 +60,9 @@ class EditBookActivity : AppCompatActivity() {
     private fun updateBook(book: Book) {
         if (validationData()){
             setBook(book)
-            BookDao(this@EditBookActivity.applicationContext).updateBook(book)
+            BookDao(this@EditBookActivity.applicationContext)
+                .updateBook(book)
+                .subscribe()
             finish()
             launchBookActivity(book)
         }
