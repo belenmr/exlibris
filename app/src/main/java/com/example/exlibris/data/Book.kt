@@ -3,6 +3,8 @@ package com.example.exlibris.data
 import android.os.Parcelable
 import com.j256.ormlite.field.DatabaseField
 import com.j256.ormlite.table.DatabaseTable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
 @DatabaseTable(tableName = "Books")
@@ -25,3 +27,11 @@ class Book (
 ) : Parcelable {
     constructor() : this("","","","","",false,null)
 }
+
+@JsonClass(generateAdapter = true)
+class BookResponse(
+    var name: String,
+    var author: String,
+    @Json(name = "publishing_house")
+    var publishingHouse: String,
+)
