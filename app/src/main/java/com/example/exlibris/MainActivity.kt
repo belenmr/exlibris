@@ -8,15 +8,24 @@ import android.util.Log
 import androidx.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exlibris.adapter.BookAdapter
 import com.example.exlibris.data.Book
 import com.example.exlibris.db.BookDao
 import com.example.exlibris.preferences.LIBRARY_OWNER
 import com.example.exlibris.preferences.SWITCH_CUSTOMIZE
+import com.example.exlibris.ui.LoginActivity
+import com.example.exlibris.ui.RegisterActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import io.reactivex.Single
@@ -37,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var fabAddBook: FloatingActionButton
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
+    private lateinit var toolbar: Toolbar
     private val adapter: BookAdapter by lazy { BookAdapter(this) }
     private val compositeDisposable = CompositeDisposable()
     private val preferences: SharedPreferences by lazy {
@@ -179,5 +191,109 @@ class MainActivity : AppCompatActivity() {
                 }
             })
     }
+
+    private fun setupDrawer() {
+
+        navView = findViewById(R.id.navigationView)
+
+        drawerLayout = findViewById(R.id.drawerLayout)
+        if (preferences.getBoolean(LOGED, false)) {
+
+            setVisibilityLogued(preferences.getString(USER_NAME, ""))
+        } else {
+            setVisibilityNotLogued()
+        }
+
+        val drawertoggle =
+                ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
+        drawerLayout.addDrawerListener(drawertoggle)
+
+        drawertoggle.syncState()
+        selectNavigation()
+    }
+
+    private fun selectNavigation() {
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.it_registro -> {
+                    this.drawerLayout.closeDrawer(GravityCompat.START)
+                    launchRegister()
+                    true
+                }
+                R.id.it_login -> {
+                    this.drawerLayout.closeDrawer(GravityCompat.START)
+                    launchLogin()
+                    true
+                }
+                R.id.it_novedades -> {
+                    this.drawerLayout.closeDrawer(GravityCompat.START)
+                    launchNovedades()
+                    true
+                }
+                R.id.it_deslog -> {
+                    this.drawerLayout.closeDrawer(GravityCompat.START)
+                    setLogout()
+                    setupDrawer()
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+    }
+
+    private fun launchLogin() {
+        startActivity(Intent(this, LoginActivity::class.java))
+    }
+
+    private fun launchRegister() {
+        startActivity(Intent(this, RegisterActivity::class.java))
+    }
+
+    private fun launchNovedades() {
+
+    }
+
+    private fun setLogout() {
+        preferences.edit().apply {
+            putBoolean(LOGED, false)
+            putString(USER_NAME, "")
+            apply()
+        }
+    }
+
+    private fun setVisibilityLogued(username: String?) {
+
+        navView.getHeaderView(0).findViewById<TextView>(R.id.nav_header_textView).text = username
+        navView.getHeaderView(0).findViewById<TextView>(R.id.nav_header_textView).visibility =
+                View.VISIBLE
+        navView.menu.findItem(R.id.it_login).setVisible(false)
+        navView.menu.findItem(R.id.it_registro).setVisible(false)
+
+    }
+
+    private fun setVisibilityNotLogued() {
+        navView.getHeaderView(0).findViewById<TextView>(R.id.nav_header_textView).visibility =
+                View.GONE
+        navView.menu.findItem(R.id.it_login).isVisible = true
+        navView.menu.findItem(R.id.it_registro).isVisible = true
+        navView.menu.clear()
+        navView.inflateMenu(R.menu.nav_items)
+    }
+
+    override fun onBackPressed() {
+        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            this.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        drawerLayout.openDrawer(navView)
+        return true
+    }
+
 
 }

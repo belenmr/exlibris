@@ -46,5 +46,10 @@
     <string name="sample_publishing_house">Scholastic Press</string>
     <string name="sample_isbn">9891231512131231587</string>
     <string name="push_notif_channel_id">2</string>
+    <string name="registrar">Registrar</string>
+    <string name="novedades">Novedades</string>
+    <string name="salir">Salir</string>
+    <string name="open">Abierto</string>
+    <string name="close">Cerrado</string>
 
 </resources>
