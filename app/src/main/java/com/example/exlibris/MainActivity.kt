@@ -81,7 +81,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        setSupportActionBar(findViewById(R.id.toolbar))
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
         fabAddBook = findViewById(R.id.floatingActionButton)
         fabAddBook.setOnClickListener{ launchAddBookActivity() }
     }
@@ -121,6 +122,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         handleCustomizeNameLibrary()
         initRecycler()
+        setupDrawer()
     }
 
     private fun handleCustomizeNameLibrary(){
