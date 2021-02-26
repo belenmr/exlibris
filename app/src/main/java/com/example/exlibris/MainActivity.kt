@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exlibris.adapter.BookAdapter
 import com.example.exlibris.data.Book
 import com.example.exlibris.db.BookDao
+import com.example.exlibris.news.NewsActivity
 import com.example.exlibris.preferences.LIBRARY_OWNER
 import com.example.exlibris.preferences.SWITCH_CUSTOMIZE
 import com.example.exlibris.ui.LoginActivity
@@ -216,6 +217,7 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.it_registro -> {
+
                     this.drawerLayout.closeDrawer(GravityCompat.START)
                     launchRegister()
                     true
@@ -252,7 +254,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchNovedades() {
-
+        startActivity(Intent(this, NewsActivity::class.java))
     }
 
     private fun setLogout() {

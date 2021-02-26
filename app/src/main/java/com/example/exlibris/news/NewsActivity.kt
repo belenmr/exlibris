@@ -27,7 +27,7 @@ class NewsActivity : AppCompatActivity(), NewsListener {
     }
 
     private fun setupUI() {
-        coordinatorLayout = findViewById(R.id.coordinatorLayout)
+        coordinatorLayout = findViewById(R.id.newsLayout)
         rvNews = findViewById(R.id.rvNews)
         rvNews.adapter = adapter
     }
