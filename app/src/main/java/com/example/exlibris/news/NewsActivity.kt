@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.exlibris.R
 import com.example.exlibris.data.BookResponse
@@ -38,6 +39,7 @@ class NewsActivity : AppCompatActivity(), NewsListener {
     }
 
     private fun retrieveNews() {
+        rvNews.layoutManager = LinearLayoutManager(this)
         NewsNetworkClient.newsApi.getNewBooks()
             .enqueue(object: Callback<List<BookResponse>> {
                 override fun onResponse(
