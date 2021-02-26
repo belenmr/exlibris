@@ -34,4 +34,5 @@ class BookResponse(
     var author: String,
     @Json(name = "publishing_house")
     var publishingHouse: String,
+    var link: String
 )
