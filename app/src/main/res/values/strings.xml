@@ -10,9 +10,16 @@
     <string name="field_isbn">ISBN</string>
     <string name="checkbox_read">Leido</string>
 
+    <!-- MainActivity -->
+    <string name="name_mainActivity">MainActivity</string>
+    <string name="mensaje_error_preferencias1">Error al obtener preferencias - LibraryOwne</string>
+    <string name="mensaje_error_preferencias2">Error al obtener preferencias - shouldCustomizeName</string>
+    <string name="mensaje_error_listaLibros">Error al obtener la lista de libros</string>
+
     <!-- Buttons -->
     <string name="button_save">Guardar</string>
     <string name="button_cancel">Cancelar</string>
+
 
     <!-- Preference -->
     <string name="preference_category_title">Personalizar nombre de la biblioteca</string>
@@ -39,6 +46,8 @@
     <string name="error_registro_password1">Complete la contraseña, debe ser mayor a 4 caracteres</string>
     <string name="error_registro_password2">El reingreso de la contraseña no coincide</string>
     <string name="error_registro">Error al registrarse, vuelva a intentarlo</string>
+    <string name="nameLogin">LoginActivity</string>
+    <string name="error_preferencias">Error al obtener preferencias</string>
 
     <!-- Sample book -->
     <string name="sample_book_name">Los Juegos Del Hambre</string>
@@ -47,6 +56,8 @@
     <string name="sample_isbn">9891231512131231587</string>
 
     <string name="push_notif_channel_id">2</string>
+
+    <!--Navigation Drawer-->
     <string name="registrar">Registrar</string>
     <string name="novedades">Novedades</string>
     <string name="salir">Cerrar Sesion</string>
@@ -54,4 +65,17 @@
     <string name="close">Cerrado</string>
     <string name="agregarLibro">Agregar Libro Nuevo</string>
 
+    <!--AddBook-->
+    <string name="nameAddBook">AddBookActivity</string>
+    <string name="errorAddBookObtenerLibro">Error al obtener libro</string>
+    <string name="mensajeAddBook">Debe ingresar datos validos</string>
+    <string name="errorFillAddBook">Fill field</string>
+    <string name="nuevoLibroAddBooK">Nuevo Libro Agregado</string>
+    <string name="mensajeNuevoLibroAddBook">Ingrese y observe el catalogo actualizado</string>
+
+    <!--BookActivity-->
+    <string name="preguntaBookActivity">¿Desea elimnarlo?</string>
+    <string name="cancelarBookActivity">CANCELAR</string>
+    <string name="eliminarBookActivity">ELIMINAR</string>
+    <string name="mensajeEliminar">Libro eliminado exitosamente</string>
 </resources>

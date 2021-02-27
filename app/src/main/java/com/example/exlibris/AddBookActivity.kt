@@ -79,7 +79,7 @@ class AddBookActivity : AppCompatActivity() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.i("AddBookActivity", "Error al obtener libro", e)
+                        Log.i("AddBookActivity", getString(R.string.errorAddBookObtenerLibro), e)
                     }
 
 
@@ -88,7 +88,7 @@ class AddBookActivity : AppCompatActivity() {
             showNotification(book)
             finish()
         } else {
-            showMessage("Debe ingresar datos validos")
+            showMessage(getString(R.string.mensajeAddBook))
         }
 
     }
@@ -126,7 +126,7 @@ class AddBookActivity : AppCompatActivity() {
 
     private fun validateField(editText: EditText) {
         if (getTextFrom(editText).isEmpty()) {
-            editText.error = "Fill field"
+            editText.error = getString(R.string.errorFillAddBook)
         }
     }
 
@@ -157,8 +157,8 @@ class AddBookActivity : AppCompatActivity() {
 
         NotificationCompat.Builder(this, BookNotif.NEW_BOOK_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_exlibris)
-                .setContentTitle("Nuevo Libro Agregado")
-                .setContentText("Ingrese y observe el catalogo actualizado")
+                .setContentTitle(getString(R.string.nuevoLibroAddBooK))
+                .setContentText(getString(R.string.mensajeNuevoLibroAddBook))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)

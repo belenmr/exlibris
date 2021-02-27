@@ -13,6 +13,7 @@ import com.example.exlibris.db.UserDao
 import com.example.exlibris.presenters.IRegistrerPresenter
 import com.example.exlibris.presenters.RegistrerPresenter
 import com.example.exlibris.repositories.LoginRepository
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputLayout
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_register.*
@@ -27,6 +28,8 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
     private lateinit var progressBar: ProgressBar
     private lateinit var container: ConstraintLayout
     private lateinit var registerBackground: View
+
+
     private val compositeDisposable = CompositeDisposable()
 
     private val presenter: IRegistrerPresenter by lazy {
@@ -56,6 +59,7 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
         registerBackground = findViewById(R.id.registerBackground)
         btnCancelar.setOnClickListener { goBack() }
         btnRegister.setOnClickListener { addUser() }
+
     }
 
     private fun addUser() {
@@ -66,12 +70,14 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
         progressBar.visibility = View.VISIBLE
         registerBackground.visibility = View.VISIBLE
         container.visibility = View.GONE
+
     }
 
     override fun hideSaving() {
         progressBar.visibility = View.GONE
         registerBackground.visibility = View.GONE
         container.visibility = View.VISIBLE
+
     }
 
     override fun goBack() {

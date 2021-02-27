@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.i("MainActivity", "Error al obtener preferencias - LibraryOwner", e)
+                    Log.i("MainActivity", getString(R.string.mensaje_error_preferencias1), e)
                 }
 
             })
@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.i("MainActivity", "Error al obtener preferencias - shouldCustomizeName", e)
+                    Log.i("MainActivity", getString(R.string.mensaje_error_preferencias2), e)
                 }
 
             })
@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.i("MainActivity", "Error al obtener la lista de libros", e)
+                    Log.i("MainActivity", getString(R.string.mensaje_error_listaLibros), e)
                 }
             })
     }

@@ -98,7 +98,7 @@ class EditBookActivity : AppCompatActivity() {
     private fun validateField(editText: EditText): Boolean {
         var result = true
         if (editText.text.toString().isNullOrEmpty()){
-            editText.error = "Fill field"
+            editText.error = getString(R.string.errorFillAddBook)
             result = false
         }
 

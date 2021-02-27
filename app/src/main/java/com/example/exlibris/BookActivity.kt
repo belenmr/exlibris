@@ -83,15 +83,15 @@ class BookActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder
             .setTitle(book.name)
-            .setMessage("¿Desea elimnarlo?")
-            .setNegativeButton("CANCELAR", { _, _ ->
+            .setMessage(getString(R.string.preguntaBookActivity))
+            .setNegativeButton(getString(R.string.cancelarBookActivity), { _, _ ->
                     //showMessage("Accion cancelada")
                 })
-            .setPositiveButton("ELIMINAR", {_,_ ->
+            .setPositiveButton(getString(R.string.eliminarBookActivity), {_,_ ->
                     BookDao(this@BookActivity.applicationContext)
                         .deleteBook(book)
                         .subscribe()
-                    showMessage("Libro eliminado exitosamente")
+                    showMessage(getString(R.string.mensajeEliminar))
                     finish()
                 })
             .setCancelable(false)

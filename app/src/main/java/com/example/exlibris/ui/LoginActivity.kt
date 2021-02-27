@@ -18,6 +18,7 @@ import com.example.exlibris.presenters.ILoginPresenter
 import com.example.exlibris.presenters.LoginPresenter
 import com.example.exlibris.repositories.LoginRepository
 import com.example.exlibris.repositories.SharePref
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputEditText
 import io.reactivex.Single
 import io.reactivex.SingleObserver
@@ -39,6 +40,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     private lateinit var logBackgroun: View
     private lateinit var progressBarLog: ProgressBar
     private lateinit var containerLog: ConstraintLayout
+
 
     private val presenter: ILoginPresenter by lazy {
         LoginPresenter(
@@ -70,6 +72,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         btnLogin.setOnClickListener { login() }
         btnRegister.setOnClickListener { register() }
         btnCancelar.setOnClickListener { goToHome() }
+
     }
 
     private fun register() {
@@ -86,12 +89,14 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         logBackgroun.visibility = View.VISIBLE
         containerLog.visibility = View.GONE
 
+
     }
 
     override fun hideLoading() {
         progressBarLog.visibility = View.GONE
         logBackgroun.visibility = View.GONE
         containerLog.visibility = View.VISIBLE
+
     }
 
     override fun onError() {
@@ -126,7 +131,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.i("LoginActivity", "Error al obtener preferencias ", e)
+                    Log.i("LoginActivity", getString(R.string.error_preferencias), e)
                 }
             })
     }
