@@ -46,7 +46,6 @@ const val USER_NAME = "userName"
 class MainActivity : AppCompatActivity() {
 
 
-    private lateinit var fabAddBook: FloatingActionButton
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
     private lateinit var toolbar: Toolbar
@@ -83,8 +82,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupUI() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        fabAddBook = findViewById(R.id.floatingActionButton)
-        fabAddBook.setOnClickListener{ launchAddBookActivity() }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
