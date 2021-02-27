@@ -23,7 +23,10 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
     private lateinit var eTpassword1: EditText
     private lateinit var eTpassword2: EditText
     private lateinit var btnRegister: Button
-    private lateinit var btnCancel: Button
+    private lateinit var btnCancelar: Button
+    private lateinit var progressBar: ProgressBar
+    private lateinit var container: ConstraintLayout
+    private lateinit var registerBackground: View
     private val compositeDisposable = CompositeDisposable()
 
     private val presenter: IRegistrerPresenter by lazy {
@@ -39,6 +42,7 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        setupUI()
     }
 
     private fun setupUI() {
@@ -46,8 +50,11 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
         eTpassword1 = findViewById(R.id.eTpassword)
         eTpassword2 = findViewById(R.id.eTpassword2)
         btnRegister = findViewById(R.id.btnRegister)
-        btnCancel = findViewById(R.id.btnCancel)
-        btnCancel.setOnClickListener { goBack() }
+        btnCancelar = findViewById(R.id.btnCancelar)
+        container = findViewById(R.id.containerreg)
+        progressBar = findViewById(R.id.progressBar)
+        registerBackground = findViewById(R.id.registerBackground)
+        btnCancelar.setOnClickListener { goBack() }
         btnRegister.setOnClickListener { addUser() }
     }
 
@@ -56,15 +63,15 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
     }
 
     override fun showSaving() {
-        /*progressBar.visibility = View.VISIBLE
-        savingBackground.visibility = View.VISIBLE
-        container.visibility = View.GONE*/
+        progressBar.visibility = View.VISIBLE
+        registerBackground.visibility = View.VISIBLE
+        container.visibility = View.GONE
     }
 
     override fun hideSaving() {
-        /*progressBar.visibility = View.GONE
-        savingBackground.visibility = View.GONE
-        container.visibility = View.VISIBLE*/
+        progressBar.visibility = View.GONE
+        registerBackground.visibility = View.GONE
+        container.visibility = View.VISIBLE
     }
 
     override fun goBack() {

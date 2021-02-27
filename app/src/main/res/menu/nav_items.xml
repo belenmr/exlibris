@@ -14,6 +14,12 @@
         android:title="@string/registrar"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/it_agregarLibro"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="@string/agregarLibro"
+        app:showAsAction="ifRoom" />
+
 
     <item
         android:id="@+id/it_novedades"

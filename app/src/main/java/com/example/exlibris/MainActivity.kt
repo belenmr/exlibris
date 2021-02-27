@@ -229,6 +229,11 @@ class MainActivity : AppCompatActivity() {
                     launchLogin()
                     true
                 }
+                R.id.it_agregarLibro -> {
+                    this.drawerLayout.closeDrawer(GravityCompat.START)
+                    launchAddBookActivity()
+                    true
+                }
                 R.id.it_novedades -> {
                     this.drawerLayout.closeDrawer(GravityCompat.START)
                     launchNovedades()

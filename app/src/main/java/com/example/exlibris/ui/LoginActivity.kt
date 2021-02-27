@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
 import com.example.exlibris.R
 import com.example.exlibris.db.UserDao
@@ -23,6 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), ILoginView {
 
@@ -30,8 +33,12 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     private lateinit var eTpassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var btnRegister: Button
+    private lateinit var btnCancelar : Button
     private val compositeDisposable = CompositeDisposable()
     private lateinit var preferences : SharedPreferences
+    private lateinit var logBackgroun: View
+    private lateinit var progressBarLog: ProgressBar
+    private lateinit var containerLog: ConstraintLayout
 
     private val presenter: ILoginPresenter by lazy {
         LoginPresenter(
@@ -48,6 +55,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setupUI()
+        getSharedPref()
     }
 
     private fun setupUI() {
@@ -55,9 +63,13 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         eTpassword = findViewById(R.id.eTpassword)
         btnLogin = findViewById(R.id.btnLogin)
         btnRegister = findViewById(R.id.btnRegister)
-
+        btnCancelar = findViewById(R.id.btnCancelar)
+        containerLog = findViewById(R.id.containerlog)
+        logBackgroun = findViewById(R.id.logBackground)
+        progressBarLog = findViewById(R.id.progressBarLogin)
         btnLogin.setOnClickListener { login() }
         btnRegister.setOnClickListener { register() }
+        btnCancelar.setOnClickListener { goToHome() }
     }
 
     private fun register() {
@@ -65,23 +77,21 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     }
 
     private fun login() {
-        presenter.doLogin(eTusuario.toString(), eTpassword.toString())
+        presenter.doLogin(eTusuario.text.toString(), eTpassword.text.toString())
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
-        /*
+
         progressBarLog.visibility = View.VISIBLE
-        logingBackgroun.visibility = View.VISIBLE
+        logBackgroun.visibility = View.VISIBLE
         containerLog.visibility = View.GONE
-        */
+
     }
 
     override fun hideLoading() {
-        TODO("Not yet implemented")
-        /*progressBarLog.visibility = View.GONE
-        logingBackgroun.visibility = View.GONE
-        containerLog.visibility = View.VISIBLE*/
+        progressBarLog.visibility = View.GONE
+        logBackgroun.visibility = View.GONE
+        containerLog.visibility = View.VISIBLE
     }
 
     override fun onError() {

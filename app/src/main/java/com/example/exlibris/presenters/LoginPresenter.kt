@@ -17,6 +17,8 @@ class LoginPresenter(private val view: ILoginView,
             repository
                 .getUser(usuario, {
                     if ((it.user == usuario) && (it.password == password)) {
+                        sharedRepository.GetPreference("libroUsuario",{},{})
+                        sharedRepository.EditPreference("libroUsuario", it.user,{},{})
                         view.hideLoading()
                         view.goToHome()
                     }

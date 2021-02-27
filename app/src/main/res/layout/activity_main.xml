@@ -15,7 +15,7 @@
         android:layout_margin="20dp"
         android:clickable="true"
         android:elevation="8dp"
-        app:srcCompat="@android:drawable/ic_input_add"/>
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 
     <LinearLayout

@@ -48,8 +48,9 @@
     <string name="push_notif_channel_id">2</string>
     <string name="registrar">Registrar</string>
     <string name="novedades">Novedades</string>
-    <string name="salir">Salir</string>
+    <string name="salir">Cerrar Sesion</string>
     <string name="open">Abierto</string>
     <string name="close">Cerrado</string>
+    <string name="agregarLibro">Agregar Libro Nuevo</string>
 
 </resources>

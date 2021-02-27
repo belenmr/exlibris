@@ -27,11 +27,11 @@ class RegistrerPresenter(private val registerView: IRegisterView,
         }
     }
 
-    private fun validateData(user: String, pass1: String, pass2: String) {
+    private fun validateData(usuario: String, password1: String, password2: String) {
         isUserDataValid = true
-        validateUser(user)
-        validatePass1(pass1)
-        validatePass2(pass1, pass2)
+        validateUser(usuario)
+        validatePass1(password1)
+        validatePass2(password1, password2)
     }
 
     private fun validatePass2(password1: String, password2: String) {
