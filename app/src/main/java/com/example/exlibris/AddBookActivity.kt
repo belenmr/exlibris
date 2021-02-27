@@ -94,7 +94,7 @@ class AddBookActivity : AppCompatActivity() {
     }
 
     private fun launchBookActivity(book: Book) {
-        val intent = Intent(this, BookActivity::class.java)
+        val intent = Intent(this, NewBookActivity::class.java)
         intent.putExtra(COMPLETED_BOOK, book)
         startActivity(intent)
     }
